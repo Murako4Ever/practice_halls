@@ -1,0 +1,26 @@
+CREATE TABLE Division (
+    Division_id integer PRIMARY KEY,
+    Division_name text NOT NULL
+);
+
+CREATE TABLE Hall (
+    Hall_id integer PRIMARY KEY,
+	Hall_name text NOT NULL,
+    Division_id integer REFERENCES Division (Division_id)
+);
+
+CREATE TABLE Users (
+    Users_id integer PRIMARY KEY,
+	Users_name text NOT NULL,
+	Users_email text NOT NULL,
+	PasswordHash text NOT NULL,
+    Division_id integer REFERENCES Division (Division_id)
+);
+
+CREATE TABLE Hallbooking (
+    Hallbooking_id integer PRIMARY KEY,
+	Hall_id integer REFERENCES Hall (Hall_id),
+	BeginDate DATE NOT NULL,
+	EndDate DATE NOT NULL,
+    Users_id integer REFERENCES Users (Users_id)
+);
